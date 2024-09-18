@@ -27,15 +27,12 @@
                         <div class="item">
                             <img src="{{ asset('/frontend/images/car-single/1.jpg') }}" alt="">
                         </div>
-                        <div class="item">
+                        {{-- <div class="item">
                             <img src="{{ asset('/frontend/images/car-single/2.jpg') }}" alt="">
                         </div>
                         <div class="item">
                             <img src="{{ asset('/frontend/images/car-single/3.jpg') }}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{ asset('/frontend/images/car-single/4.jpg') }}" alt="">
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
