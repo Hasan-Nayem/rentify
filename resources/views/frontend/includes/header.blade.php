@@ -45,7 +45,7 @@
                     </div>
                     <div class="de-flex-col header-col-mid">
                         <ul id="mainmenu">
-                            <li><a class="menu-item" href="index.html">Home</a>
+                            <li><a class="menu-item" href="{{ route('homepage') }}">Home</a>
                             </li>
                             <li><a class="menu-item" href="{{ route('showCars') }}">Cars</a>
                             </li>
