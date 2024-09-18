@@ -30,10 +30,10 @@
                         <div class="de-flex-col">
                             <!-- logo begin -->
                             <div id="logo">
-                                <a href="{{ route('homepage') }}">
+                                <a href="{{ route('dashboard') }}">
                                     <img class="logo-1" src="{{ asset('/frontend/images/logo-light.png') }}" alt="">
                                     <img class="logo-2" src="{{ asset('/frontend/images/logo.png') }}" alt="">
-                                    {{-- @if (Route::currentRouteName() == 'homepage')
+                                    {{-- @if (Route::currentRouteName() == 'dashboard')
                                         <img class="logo-2" src="{{ asset('/frontend/images/logo.png') }}" alt="">
                                     @else
                                         <img class="logo-2" src="{{ asset('/frontend/images/logo-light.png') }}" alt="">
@@ -45,26 +45,32 @@
                     </div>
                     <div class="de-flex-col header-col-mid">
                         <ul id="mainmenu">
-                            <li><a class="menu-item" href="{{ route('homepage') }}">Home</a>
+                            <li><a class="menu-item" href="{{ route('dashboard') }}">Home</a>
                             </li>
                             <li><a class="menu-item" href="{{ route('showCars') }}">Cars</a>
                             </li>
-                            <li><a class="menu-item" href="booking.html">Booking</a></li>
                             <li><a class="menu-item" href="{{ route('dashboard.user') }}">My Account</a>
                                 <ul>
-                                    <li><a class="menu-item" href="account-dashboard.html">Dashboard</a></li>
-                                    <li><a class="menu-item" href="account-profile.html">My Profile</a></li>
-                                    <li><a class="menu-item" href="account-booking.html">My Orders</a></li>
-                                    <li><a class="menu-item" href="account-favorite.html">My Favorite Cars</a></li>
+                                    <li><a class="menu-item" href="{{ route('dashboard.user') }}">Dashboard</a></li>
+                                    <li><a class="menu-item" href="{{ route('profile.user') }}">My Profile</a></li>
+                                    <li><a class="menu-item" href="{{ route('orders.user') }}">My Orders</a></li>
+                                    {{-- <li><a class="menu-item" href="account-favorite.html">My Favorite Cars</a></li> --}}
                                 </ul>
                             </li>
                         </ul>
                     </div>
                     <div class="de-flex-col">
-                        <div class="menu_side_area">
-                            <a href="{{ route("login") }}" class="btn-main">Sign In</a>
-                            <span id="menu-btn"></span>
-                        </div>
+                        @if (Auth::user())
+                            <div class="menu_side_area">
+                                <a href="{{ route("logout") }}" class="btn-main">Sign Out</a>
+                                <span id="menu-btn"></span>
+                            </div>
+                        @else
+                            <div class="menu_side_area">
+                                <a href="{{ route("login") }}" class="btn-main">Sign In</a>
+                                <span id="menu-btn"></span>
+                            </div>
+                        @endif
                     </div>
                     {{-- <div class="de-flex-col" style="background-size: 100%; background-repeat: no-repeat;">
                         <div class="menu_side_area" style="background-size: 100%; background-repeat: no-repeat;">

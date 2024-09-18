@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('car_id')->references('id')->on('cars')->cascadeOnUpdate()->cascadeOnDelete();
             $table->date('start_date');
             $table->date('end_date');
-            $table->decimal('total_cost ');
+            $table->decimal('total_cost');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

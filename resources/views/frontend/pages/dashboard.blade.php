@@ -26,12 +26,12 @@
                     <div class="card padding30 rounded-5">
                         <div class="profile_avatar">
                             <div class="profile_img">
-                                <img src="{{ asset('/frontend/images/profile/1.jpg') }}" alt="">
+                                <img src="{{ asset('/frontend/images/profile/1.png') }}" alt="">
                             </div>
                             <div class="profile_name">
                                 <h4>
-                                    Monica Lucas
-                                    <span class="profile_username text-gray">monica@rentaly.com</span>
+                                    {{ Auth::user()->name }}
+                                    <span class="profile_username text-gray">{{ Auth::user()->email }}</span>
                                 </h4>
                             </div>
                         </div>
@@ -41,7 +41,14 @@
                             <li><a href="{{ route('profile.user') }}" class="{{ Route::currentRouteName() == 'profile.user' ? "active" : "" }}"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="{{ route('orders.user') }}" class="{{ Route::currentRouteName() == 'orders.user' ? "active" : "" }}"><i class="fa fa-calendar"></i>My Orders</a></li>
                             {{-- <li><a href="account-favorite.html"><i class="fa fa-car"></i>My Favorite Cars</a></li> --}}
-                            <li><a href="/"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+                            {{-- <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <li>
+                                    <i class="fa fa-sign-out"><input type="submit" value="Sign Out">
+                                </li>
+                            </form> --}}
+                            <li><a href="{{ route('logout') }}"><i class="fa fa-sign-out"></i>Sign Out</a></li>
+
                         </ul>
                     </div>
                 </div>
