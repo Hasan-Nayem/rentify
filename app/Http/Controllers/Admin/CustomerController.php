@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -12,7 +13,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.customers.manage');
+        $customers = User::get();
+        return view('backend.pages.customers.manage', compact('customers'));
     }
 
     /**
@@ -44,7 +46,8 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        return view('backend.pages.customers.edit');
+        $customer = User::find($id);
+        return view('backend.pages.customers.edit', compact('customer'));
     }
 
     /**
@@ -52,7 +55,13 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $customer = User::find($id);
+        $customer->name = $request->name;
+        $customer->email = $request->email;
+        $customer->role = $request->role;
+        $customer->save();
+        return redirect()->route('customer.index')
+                ->with('warning', 'Customer info updated');
     }
 
     /**

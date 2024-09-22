@@ -33,7 +33,8 @@
          <div class="col-12 col-lg-12 d-flex">
            <div class="card border shadow-none w-100">
              <div class="card-body">
-               <form class="row g-3">
+               <form class="row g-3" method="POST" action="{{ route('car.store') }}" enctype="multipart/form-data">
+                 @csrf
                  <div class="col-6">
                    <label class="form-label">Name</label>
                    <input type="text" name="name" class="form-control" placeholder="Car name">
@@ -52,9 +53,13 @@
                 </div>
                 <div class="col-6">
                   <label class="form-label">Car Type</label>
-                  <select class="form-select">
-                    <option>SUV</option>
-                    <option>Sedan</option>
+                  <select class="form-select" name="car_type">
+                    <option value="suv">SUV</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="hatchback">Hatchback</option>
+                    <option value="minivan">Minivan</option>
+                    <option value="truck">Truck</option>
+                    <option value="sports car">Sports car</option>
                   </select>
                 </div>
                 <div class="col-6">
@@ -63,9 +68,9 @@
                 </div>
                 <div class="col-6">
                     <label class="form-label">Availability Status</label>
-                    <select class="form-select">
-                      <option>Available</option>
-                      <option>Not Available</option>
+                    <select class="form-select" name="availability">
+                      <option value="1">Available</option>
+                      <option value="0">Not Available</option>
                     </select>
                   </div>
                 <div class="col-6">

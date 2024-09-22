@@ -33,18 +33,27 @@
          <div class="col-12 col-lg-12 d-flex">
            <div class="card border shadow-none w-100">
              <div class="card-body">
-               <form class="row g-3">
+               <form class="row g-3" method="POST" action="{{ route('customer.update', $customer->id) }}">
+                 @csrf
                  <div class="col-4">
                    <label class="form-label">Customer Name</label>
-                   <input type="text" name="name" class="form-control" placeholder="Customer name" disabled>
+                   <input type="text" name="name" class="form-control" placeholder="Customer name"  value="{{ $customer->name }}">
                  </div>
                  <div class="col-4">
                   <label class="form-label">Customer email</label>
-                  <input type="text" name="email" class="form-control" placeholder="Customer email" disabled>
+                  <input type="text" name="email" class="form-control" placeholder="Customer email"  value="{{ $customer->email }}">
                 </div>
                  <div class="col-4">
                   <label class="form-label">Customer phone</label>
-                  <input type="text" name="phone" class="form-control" placeholder="Customer phone" disabled>
+                  <input type="text" name="phone" class="form-control" placeholder="Customer phone" disabled value="01521394776">
+                </div>
+                <hr>
+                 <div class="col-4">
+                  <label class="form-label"><span class="badge bg-danger">User Access</span></label>
+                  <select name="role" id="role" class="form-control">
+                    <option value="admin" @if($customer->role == 'admin') selected @endif class="text-danger">Admin</option>
+                    <option value="customer" @if($customer->role == 'customer') selected @endif>Customer</option>
+                  </select>
                 </div>
                  <div class="col-12">
                   <label class="form-label">Customer Address</label>

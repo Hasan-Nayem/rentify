@@ -33,39 +33,44 @@
          <div class="col-12 col-lg-12 d-flex">
            <div class="card border shadow-none w-100">
              <div class="card-body">
-               <form class="row g-3">
+               <form class="row g-3" method="POST" action="{{ route('car.update', $car->id) }}" enctype="multipart/form-data">
+                @csrf
                  <div class="col-6">
                    <label class="form-label">Name</label>
-                   <input type="text" name="name" class="form-control" placeholder="Car name">
+                   <input type="text" name="name" class="form-control" placeholder="Car name" value="{{ $car->name }}">
                  </div>
                  <div class="col-6">
                   <label class="form-label">Brand</label>
-                  <input type="text" name="brand" class="form-control" placeholder="Car brand">
+                  <input type="text" name="brand" class="form-control" placeholder="Car brand" value="{{ $car->brand }}">
                 </div>
                  <div class="col-6">
                   <label class="form-label">Model</label>
-                  <input type="text" name="model" class="form-control" placeholder="Car model">
+                  <input type="text" name="model" class="form-control" placeholder="Car model" value="{{ $car->model }}">
                 </div>
                  <div class="col-6">
                   <label class="form-label">Year of Manufacture</label>
-                  <input type="text" name="manufacture" class="form-control" placeholder="Car year of manufacture">
+                  <input type="text" name="manufacture" class="form-control" placeholder="Car year of manufacture" value="{{ $car->year }}">
                 </div>
                 <div class="col-6">
                   <label class="form-label">Car Type</label>
-                  <select class="form-select">
-                    <option>SUV</option>
-                    <option>Sedan</option>
+                  <select class="form-select" name="car_type">
+                    <option value="suv" @if($car->car_type == 'suv') selected  @endif>SUV</option>
+                    <option value="sedan" @if($car->car_type == 'sedan') selected  @endif>Sedan</option>
+                    <option value="hatchback" @if($car->car_type == 'hatchback') selected  @endif>Hatchback</option>
+                    <option value="minivan" @if($car->car_type == 'minivan') selected  @endif>Minivan</option>
+                    <option value="truck" @if($car->car_type == 'truck') selected  @endif>Truck</option>
+                    <option value="sports car" @if($car->car_type == 'sports car') selected  @endif>Sports car</option>
                   </select>
                 </div>
                 <div class="col-6">
                    <label class="form-label">Daily Rent Price</label>
-                   <input type="text" name="daily_rent" class="form-control" placeholder="Car daily rent">
+                   <input type="text" name="daily_rent" class="form-control" placeholder="Car daily rent" value="{{ $car->daily_rent_price }}">
                 </div>
                 <div class="col-6">
                     <label class="form-label">Availability Status</label>
-                    <select class="form-select">
-                      <option>Available</option>
-                      <option>Not Available</option>
+                    <select class="form-select" name="availability">
+                      <option value="1" @if($car->availability == 1) selected @endif>Available</option>
+                      <option value="0" @if($car->availability == 0) selected @endif>Not Available</option>
                     </select>
                   </div>
                 <div class="col-6">

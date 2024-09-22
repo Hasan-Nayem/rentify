@@ -37,9 +37,9 @@ Route::prefix('/admin')->middleware('auth')->group(function (){
         Route::get('/', [CarController::class, 'index'])->name('car.index');
         Route::get('/create', [CarController::class, 'create'])->name('car.create');
         Route::post('/store', [CarController::class, 'store'])->name('car.store');
-        Route::get('/edit', [CarController::class, 'edit'])->name('car.edit');
-        Route::post('/update', [CarController::class, 'update'])->name('car.update');
-        Route::get('/delete', [CarController::class, 'delete'])->name('car.delete');
+        Route::get('/edit/{id}', [CarController::class, 'edit'])->name('car.edit');
+        Route::post('/update/{id}', [CarController::class, 'update'])->name('car.update');
+        Route::get('/delete/{id}', [CarController::class, 'destroy'])->name('car.delete');
     })->middleware(Admin::class);
     Route::prefix('/rentals')->group(function (){
         Route::get('/manage', [RentalController::class, 'index'])->name('rentals.index');
@@ -50,7 +50,12 @@ Route::prefix('/admin')->middleware('auth')->group(function (){
         Route::get('/manage', [CustomerController::class, 'index'])->name('customer.index');
         Route::get('/view', [CustomerController::class, 'show'])->name('customer.show');
         Route::get('/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+        Route::post('/update/{id}', [CustomerController::class, 'update'])->name('customer.update');
     })->middleware(Admin::class);
+});
+
+Route::get('/toast', function(){
+    return redirect()->back()->with('success', 'toast success');
 });
 
 require __DIR__.'/auth.php';

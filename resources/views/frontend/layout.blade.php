@@ -27,6 +27,7 @@
 
     </div>
 
+        @include('frontend.includes.toast')
         @include('frontend.includes.scripts')
 
 </body>

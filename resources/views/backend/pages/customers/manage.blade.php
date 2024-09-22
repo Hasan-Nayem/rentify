@@ -38,6 +38,7 @@
           <tr>
            <th>#SL</th>
            <th>Customer Name</th>
+           <th>Access Type</th>
            <th>Email</th>
            <th>Phone</th>
            <th>Address</th>
@@ -46,17 +47,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-           <td>1</td>
+            @php
+                $i=1;
+            @endphp
+            @foreach ($customers as $customer)
+            <tr>
+            <td>{{ $i }}</td>
             <td>
               <div class="d-flex align-items-center gap-3 cursor-pointer">
                  <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
                  <div class="">
-                   <p class="mb-0">Thomas Hardy</p>
+                   <p class="mb-0">{{ $customer->name }}</p>
                  </div>
               </div>
             </td>
-            <td>nayemmh66@gmail.com</td>
+            <td>
+                @if ($customer->role == 'admin')
+                    <span class="badge bg-danger">Admin</span>
+                @else
+                    <span class="badge bg-primary">Customer</span>
+                @endif
+            </td>
+            <td>{{ $customer->email }}</td>
             <td>01521394776</td>
             <td>Lorem ipsum dolor sit ...</td>
             <td class="">
@@ -66,11 +78,15 @@
             <td>
               <div class="table-actions d-flex align-items-center gap-3 fs-6">
                 <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Views" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                <a href="{{ route('customer.edit',1) }}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
+                <a href="{{ route('customer.edit',$customer->id) }}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
                 {{-- <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a> --}}
               </div>
             </td>
-          </tr>
+            @php
+                $i++;
+            @endphp
+            @endforeach
+            </tr>
         </tbody>
       </table>
     </div>

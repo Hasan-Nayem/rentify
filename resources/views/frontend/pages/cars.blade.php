@@ -37,7 +37,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="item_filter_group">
+                    {{-- <div class="item_filter_group">
                         <h4>Vehicle Type</h4>
                         <div class="de_form">
                             <div class="de_checkbox">
@@ -61,25 +61,11 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="item_filter_group">
-                        <h4>Car Body Type</h4>
+                        <h4>Car Type</h4>
                         <div class="de_form">
-                            <div class="de_checkbox">
-                                <input id="car_body_type_1" name="car_body_type_1" type="checkbox" value="car_body_type_1">
-                                <label for="car_body_type_1">Convertible</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_2" name="car_body_type_2" type="checkbox" value="car_body_type_2">
-                                <label for="car_body_type_2">Coupe</label>
-                            </div>
-
-                            <div class="de_checkbox">
-                                <input id="car_body_type_3" name="car_body_type_3" type="checkbox" value="car_body_type_3">
-                                <label for="car_body_type_3">Exotic Cars</label>
-                            </div>
 
                             <div class="de_checkbox">
                                 <input id="car_body_type_4" name="car_body_type_4" type="checkbox" value="car_body_type_4">
@@ -107,11 +93,6 @@
                             </div>
 
                             <div class="de_checkbox">
-                                <input id="car_body_type_9" name="car_body_type_9" type="checkbox" value="car_body_type_9">
-                                <label for="car_body_type_9">Station Wagon</label>
-                            </div>
-
-                            <div class="de_checkbox">
                                 <input id="car_body_type_10" name="car_body_type_10" type="checkbox" value="car_body_type_10">
                                 <label for="car_body_type_10">SUV</label>
                             </div>
@@ -119,7 +100,7 @@
                         </div>
                     </div>
 
-                    <div class="item_filter_group">
+                    {{-- <div class="item_filter_group">
                         <h4>Car Seats</h4>
                         <div class="de_form">
                             <div class="de_checkbox">
@@ -143,9 +124,9 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> --}}
 
-                    <div class="item_filter_group">
+                    {{-- <div class="item_filter_group">
                         <h4>Car Engine Capacity (cc)</h4>
                         <div class="de_form">
                             <div class="de_checkbox">
@@ -169,10 +150,10 @@
                             </div>
 
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="item_filter_group">
-                        <h4>Price ($)</h4>
+                        <h4>Price (৳)</h4>
                           <div class="price-input">
                             <div class="field">
                               <span>Min</span>
