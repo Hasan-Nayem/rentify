@@ -25,7 +25,7 @@
                 <div class="col-lg-6">
                     <div id="slider-carousel" class="owl-carousel">
                         <div class="item">
-                            <img src="{{ asset('/frontend/images/car-single/1.jpg') }}" alt="">
+                            <img src="{{ asset( $car->image ) }}" alt="">
                         </div>
                         {{-- <div class="item">
                             <img src="{{ asset('/frontend/images/car-single/2.jpg') }}" alt="">
@@ -37,28 +37,27 @@
                 </div>
 
                 <div class="col-lg-3">
-                    <h3>BMW M2 2020</h3>
-                    <p>The BMW M2 is the high-performance version of the 2 Series 2-door coupé. The first generation of the M2 is the F87 coupé and is powered by turbocharged.</p>
-
+                    <h3>{{ $car->name }}</h3>
+                    <p><div class="1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, reiciendis tenetur ratione velit officia accusamus voluptates iste libero, tempore ipsa quis corrupti cumque autem numquam magnam rerum quo ad quia!</div></p>
                     <div class="spacer-10"></div>
 
                     <h4>Specifications</h4>
                     <div class="de-spec">
                         <div class="d-row">
                             <span class="d-title">Body</span>
-                            <spam class="d-value">Sedan</spam>
+                            <spam class="d-value text-uppercase">{{ $car->car_type }}</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Seat</span>
-                            <spam class="d-value">2 seats</spam>
+                            <spam class="d-value">{{ rand(1,4) }}</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Door</span>
-                            <spam class="d-value">2 doors</spam>
+                            <spam class="d-value">{{ rand(1,4) }}</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Luggage</span>
-                            <spam class="d-value">150</spam>
+                            <spam class="d-value">{{ rand(1,5) }}</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Fuel Type</span>
@@ -66,15 +65,15 @@
                         </div>
                         <div class="d-row">
                             <span class="d-title">Engine</span>
-                            <spam class="d-value">3000</spam>
+                            <spam class="d-value">{{ rand(1500,10000) }}</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Year</span>
-                            <spam class="d-value">2020</spam>
+                            <spam class="d-value">{{ $car->year }}</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Mileage</span>
-                            <spam class="d-value">200</spam>
+                            <spam class="d-value">{{ rand(20,100) }}</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Transmission</span>
@@ -86,7 +85,7 @@
                         </div>
                         <div class="d-row">
                             <span class="d-title">Fuel Economy</span>
-                            <spam class="d-value">18.5</spam>
+                            <spam class="d-value">{{ rand(10,100) }}</spam>
                         </div>
                         <div class="d-row">
                             <span class="d-title">Exterior Color</span>
@@ -112,11 +111,13 @@
                 <div class="col-lg-3">
                     <div class="de-price text-center">
                         Daily rate
-                        <h3>$265</h3>
+                        <h3>${{ $car->daily_rent_price }}</h3>
                     </div>
                     <div class="spacer-30"></div>
+                    @if (Auth::user())
                     <div class="de-box mb25">
-                        <form name="contactForm" id='contact_form' method="post">
+                        <form name="contactForm" id='contact_form' method="POST" action="{{ route('rental.store', ['userId' => Auth::user()->id, 'carId' => $car->id]) }}">
+                            @csrf
                             <h4>Booking this car</h4>
 
                             <div class="spacer-20"></div>
@@ -265,6 +266,10 @@
 
                         </form>
                     </div>
+                    @else
+                        <a href="{{ route('login') }}" class="btn-main mx-auto">Sign in to book</a>
+                    @endif
+                    <div class="spacer-30"></div>
 
                     <div class="de-box">
                         <h4>Share</h4>

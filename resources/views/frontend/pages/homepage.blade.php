@@ -36,31 +36,35 @@
 
                 <div id="items-carousel" class="owl-carousel wow fadeIn">
 
-                    <div class="col-lg-12">
-                        <div class="de-item mb30">
-                            <div class="d-img">
-                                <img src="{{ asset('/frontend/images/cars/jeep-renegade.jpg') }}" class="img-fluid" alt="">
-                            </div>
-                            <div class="d-info">
-                                <div class="d-text">
-                                    <h4>Jeep Renegade</h4>
-                                    <div class="d-item_like">
-                                        <i class="fa fa-heart"></i><span>74</span>
-                                    </div>
-                                    <div class="d-atr-group">
-                                        <span class="d-atr"><img src="{{ asset('/frontend/images/icons/1-green.svg') }}" alt="">5</span>
-                                        <span class="d-atr"><img src="{{ asset('/frontend/images/icons/2-green.svg') }}" alt="">2</span>
-                                        <span class="d-atr"><img src="{{ asset('/frontend/images/icons/3-green.svg') }}" alt="">4</span>
-                                        <span class="d-atr"><img src="{{ asset('/frontend/images/icons/4-green.svg') }}" alt="">SUV</span>
-                                    </div>
-                                    <div class="d-price">
-                                        Daily rate from <span>$265</span>
-                                        <a class="btn-main" href="car-single.html">Rent Now</a>
-                                    </div>
+                @foreach ($cars as $car)
+                <div class="col-lg-12">
+                    <div class="de-item mb30">
+                        <div class="d-img">
+                            <img src="{{ asset($car->image) }}" class="img-fluid" style="max-height: 220px" alt="">
+                        </div>
+                        <div class="d-info">
+                            <div class="d-text">
+                                <h4>{{ $car->name }}</h4>
+                                <div class="d-item_like">
+                                    <i class="fa fa-heart"></i><span>{{ rand(1,200) }}</span>
+                                </div>
+                                <div class="d-atr-group">
+                                    <span class="d-atr"><img src="{{ asset('/frontend/images/icons/1-green.svg') }}" alt="">5</span>
+                                    <span class="d-atr"><img src="{{ asset('/frontend/images/icons/2-green.svg') }}" alt="">2</span>
+                                    <span class="d-atr"><img src="{{ asset('/frontend/images/icons/3-green.svg') }}" alt="">4</span>
+                                    <span class="d-atr text-uppercase"><img src="{{ asset('/frontend/images/icons/4-green.svg') }}" alt="">
+                                        {{ $car->car_type }}
+                                    </span>
+                                </div>
+                                <div class="d-price">
+                                    Daily rate from <span>${{ $car->daily_rent_price }}</span>
+                                    <a class="btn-main" href="{{ route('car.details',$car->id) }}">Rent Now</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                @endforeach
 
                     <!-- <div class="col-lg-12">
                         <div class="de-item mb30">

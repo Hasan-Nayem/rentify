@@ -22,12 +22,18 @@ use Illuminate\Support\Facades\Route;
 //User routes
 Route::get('/', [PageController::class, 'homepage'])->name('dashboard');
 Route::get('/cars', [PageController::class, 'showCars'])->name('showCars');
-Route::get('/car-details', [PageController::class, 'carDetails'])->name('car.details');
+Route::get('/car-details/{id}', [PageController::class, 'carDetails'])->name('car.details');
+Route::get('/search-cars', [CarController::class, 'search'])->name('car.search');
+Route::get('/cars/filter', [CarController::class, 'filterCars'])->name('cars.filter');
+Route::get('/search-users', [CustomerController::class, 'search'])->name('user.search');
 
-Route::prefix('/my-account')->middleware('auth')->group(function () {
-    Route::get('/', [PageController::class, 'myAccount'])->name('dashboard.user');
-    Route::get('/profile', [PageController::class, 'profile'])->name('profile.user');
-    Route::get('/orders', [PageController::class, 'orders'])->name('orders.user');
+Route::middleware('auth')->group(function(){
+    Route::post('/car-book/{userId}/{carId}', [RentalController::class, 'store'])->name('rental.store');
+    Route::prefix('/my-account')->group(function () {
+        Route::get('/', [PageController::class, 'myAccount'])->name('dashboard.user');
+        Route::get('/profile', [PageController::class, 'profile'])->name('profile.user');
+        Route::get('/orders', [PageController::class, 'orders'])->name('orders.user');
+    });
 });
 
 //Admin routes

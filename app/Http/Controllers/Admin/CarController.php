@@ -128,4 +128,41 @@ class CarController extends Controller
         return redirect()->route('car.index')
                ->with('warning', 'This car deleted from list successfully');
     }
+
+    public function search(Request $request){
+        $query = $request->input('query');
+        $cars = Car::where('name', 'LIKE', "%{$query}%")
+                ->orWhere('brand', 'LIKE', "%{$query}%")
+                ->orWhere('model', 'LIKE', "%{$query}%")
+                ->orWhere('car_type', 'LIKE', "%{$query}%")
+                ->orWhere('daily_rent_price', 'LIKE', "%{$query}%")
+                ->get();
+        return response()->json($cars);
+    }
+    public function filterCars(Request $request)
+    {
+        // Get car types from the request
+        $carTypes = $request->input('car_types', []);
+        $minPrice = $request->input('min_price', 0);
+        $maxPrice = $request->input('max_price', 2000);
+
+        // Query to filter cars based on selected types and price range
+        $query = Car::query();
+
+        if (!empty($carTypes)) {
+            $query->whereIn('car_type', $carTypes);
+        }
+
+        $query->whereBetween('daily_rent_price', [$minPrice, $maxPrice]);
+
+        $cars = $query->get();
+
+        // Return the filtered view (use a partial for the car listings)
+        return view('frontend.pages.cars_partial', compact('cars'))->render();
+    }
+    public function carBook(String $userId, String $carId){
+        echo "User id - ". $userId;
+        echo "Car id - ". $carId;
+        exit();
+    }
 }

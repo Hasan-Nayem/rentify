@@ -26,9 +26,11 @@ class RentalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, String $userId, String $carId)
     {
-        //
+        echo "User id - ". $userId;
+        echo "Car id - ". $carId;
+        exit();
     }
 
     /**

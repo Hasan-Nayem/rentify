@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,8 @@ class PageController extends Controller
      */
     public function homepage()
     {
-        return view('frontend.pages.homepage');
+        $cars = Car::get();
+        return view('frontend.pages.homepage', compact('cars'));
     }
 
     /**
@@ -21,11 +23,13 @@ class PageController extends Controller
      */
     public function showCars()
     {
-        return view('frontend.pages.cars');
+        $cars = Car::get();
+        return view('frontend.pages.cars', compact('cars'));
     }
-    public function carDetails()
+    public function carDetails(String $id)
     {
-        return view('frontend.pages.carDetails');
+        $car = Car::find($id);
+        return view('frontend.pages.carDetails', compact('car'));
     }
     public function myAccount()
     {

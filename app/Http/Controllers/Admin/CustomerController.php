@@ -13,7 +13,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $customers = User::get();
+        $customers = User::orderBy('role', 'asc')->get();
         return view('backend.pages.customers.manage', compact('customers'));
     }
 
@@ -70,5 +70,17 @@ class CustomerController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $users = User::where('name', 'LIKE', "%{$query}%")
+                ->orWhere('email', 'LIKE', "%{$query}%")
+                ->orWhere('role', 'LIKE', "%{$query}%")
+                // ->orWhere('model', 'LIKE', "%{$query}%")
+                // ->orWhere('car_type', 'LIKE', "%{$query}%")
+                // ->orWhere('daily_rent_price', 'LIKE', "%{$query}%")
+                ->get();
+        return response()->json($users);
     }
 }
