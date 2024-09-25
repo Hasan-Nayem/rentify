@@ -38,50 +38,82 @@
           <tr>
            <th>Rent ID</th>
            <th>Customer Name</th>
-           <th>Car Details</th>
-           <th>Rental Started From</th>
-           <th>Rental End</th>
-           <th>Total Cost</th>
+           <th>Car Details</th>>
            <th>Status</th>
            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-           <td>1</td>
-            <td>
-              <div class="d-flex align-items-center gap-3 cursor-pointer">
-                 <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
-                 <div class="">
-                   <p class="mb-0">Thomas Hardy</p>
-                 </div>
-              </div>
-            </td>
-            <td>
-              <div class="d-flex align-items-center gap-3 cursor-pointer">
-                 <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
-                 <div class="">
-                   <p class="mb-0">Toyota Premio, Brand: Toyota</p>
-                 </div>
-              </div>
-            </td>
-            <td>16/08/2024</td>
-            <td>19/09/2024</td>
-            <td>15500/= Bdt</td>
-            <td>
-                <p class="badge bg-warning text-white">Ongoing</p>
-                {{-- <p class="badge bg-danger text-white">Cancelled By User</p>
-                <p class="badge bg-danger text-white">Cancelled By Admin</p>
-                <p class="badge bg-success text-white">Ccomplted</p> --}}
-            </td>
-            <td>
-              <div class="table-actions d-flex align-items-center gap-3 fs-6">
-                <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Views" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
-                <a href="{{ route('rentals.edit',1) }}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
-                {{-- <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Delete" aria-label="Delete"><i class="bi bi-trash-fill"></i></a> --}}
-              </div>
-            </td>
-          </tr>
+            @foreach ($orders as $order)
+                <tr>
+                <td>#{{ $order->id }}</td>
+                    <td>
+                    <div class="d-flex align-items-center gap-3 cursor-pointer">
+                        <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
+                        <div class="">
+                        <p class="mb-0">{{$order->users->name}}</p>
+                        </div>
+                    </div>
+                    </td>
+                    <td>
+                    <div class="d-flex align-items-center gap-3 cursor-pointer">
+                        <img src="{{ asset($order->cars->image) }}" class="rounded-circle" width="44" height="44" alt="">
+                        <div class="">
+                        <p class="mb-0">{{$order->cars->name}}, Brand: {{$order->cars->brand}}</p>
+                        </div>
+                    </div>
+                    </td>
+                    <td>
+                        @if ($order->status == 'completed')
+                            <p class="badge bg-success text-white">Complted</p>
+                        @elseif ($order->status == 'pending')
+                            <p class="badge bg-warning text-white">Pending</p>
+                        @elseif ($order->status == 'scheduled')
+                            <p class="badge bg-info text-white">Scheduled</p>
+                        @elseif ($order->status == 'cancelled')
+                            <p class="badge bg-danger text-white">Cancelled</p>
+                        @endif
+                    </td>
+                    <td>
+                    <div class="table-actions d-flex align-items-center gap-3 fs-6">
+                        <a href="javascript:;" class="text-primary" type="button" data-bs-toggle="modal" data-bs-target="#reantalModal{{ $order->id }}" data-bs-placement="bottom" title="" data-bs-original-title="Views" aria-label="Views"><i class="bi bi-eye-fill"></i></a>
+
+                        <a href="{{ route('rentals.edit',1) }}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Edit" aria-label="Edit"><i class="bi bi-pencil-fill"></i></a>
+                    </div>
+                    </td>
+                </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="reantalModal{{ $order->id }}" tabindex="-1" aria-labelledby="reantalModal{{ $order->id }}Label" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="reantalModal{{ $order->id }}Label">Booking details</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h1 class="text-center">User Information</h1>
+                            <img src="https://i.ibb.co.com/f0n9cMk/logo.png" alt="" srcset="" class="img-thumbnail my-2">
+                            <p class="">User Name: {{ $order->users->name }}</p>
+                            <p class="">Email: {{ $order->users->email }}</p>
+                            <p class="">Phone: {{ $order->users->phone }}</p>
+                            <h1 class="text-center">Trip Information</h1>
+                            <p class="">Picup Location: {{ $order->pickup_location }}</p>
+                            <p class="">Dropoff Location: {{ $order->drop_off_location }}</p>
+                            <p class="">Starting Date: {{ $order->start_date }}</p>
+                            <p class="">Ending Date: {{ $order->end_date }}</p>
+                            <h4 class="fw-bolder text-center text-success">Total revenue - {{ $order->total_cost }}</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close now</button>
+                            <button type="button" class="btn btn-success">Approve this booking</button>
+                            <button type="button" class="btn btn-danger">Cancel this booking</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+            @endforeach
+
         </tbody>
       </table>
     </div>

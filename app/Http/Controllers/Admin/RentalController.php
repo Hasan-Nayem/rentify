@@ -18,7 +18,8 @@ class RentalController extends Controller
      */
     public function index()
     {
-        return view('backend.pages.rentals.manage');
+        $orders = Rental::with(['cars', 'users'])->get();
+        return view('backend.pages.rentals.manage', compact('orders'));
     }
 
     /**
@@ -34,34 +35,7 @@ class RentalController extends Controller
      */
     public function store(Request $request, String $userId, String $carId)
     {
-        $car = Car::find($carId);
-        $userEmail = User::find($userId);
-        $start_date = new DateTime($request->start_date);
-        $end_date = new DateTime($request->end_date);
 
-        if($start_date > $end_date){
-            return redirect()->back()
-            ->with('error_message', 'Invalid pickup date');
-        }
-        $totalDays = $start_date->diff($end_date);
-        // dd($totalDays->days);
-        // exit();
-        $rentalInfo = new Rental();
-        $rentalInfo->user_id = $userId;
-        $rentalInfo->car_id	 = $carId;
-        $rentalInfo->pickup_location = $request->PickupLocation;
-        $rentalInfo->drop_off_location	 = $request->DropoffLocation;
-        $rentalInfo->start_date	 = $start_date->format('d/m/y');
-        $rentalInfo->end_date	 = $end_date->format('d/m/y');
-        if($totalDays->days == 0){
-            $rentalInfo->total_cost	 = $car->daily_rent_price;
-        }else{
-            $rentalInfo->total_cost	 = ($totalDays->days * $car->daily_rent_price);
-        }
-        $rentalInfo->status	 = 'pending';
-        $rentalInfo->save();
-        Mail::to($request->user())->send(new BookingNotification($userEmail->name));
-        return redirect()->route('dashboard.user')->with('message', 'Your booking request is saved successfully.');
     }
 
     /**
