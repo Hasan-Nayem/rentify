@@ -17,8 +17,10 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->unsignedBigInteger('car_id');
             $table->foreign('car_id')->references('id')->on('cars')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->text('pickup_location');
+            $table->text('drop_off_location');
+            $table->string('start_date');
+            $table->string('end_date');
             $table->decimal('total_cost');
             $table->string('status')->default('ongoing');
             $table->timestamp('created_at')->useCurrent();

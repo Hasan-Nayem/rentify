@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\Rental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +34,19 @@ class PageController extends Controller
     }
     public function myAccount()
     {
-        return view('frontend.pages.dashboard.stats');
+        $orders = Rental::where('user_id', Auth::user()->id)->with('cars')->get();
+        $statusCounts = Rental::where('user_id', Auth::user()->id)
+            ->selectRaw('status, COUNT(*) as count')
+            ->groupBy('status')
+            ->pluck('count', 'status');
+
+        $pendingCount = $statusCounts->get('pending', 0);
+        $scheduledCount = $statusCounts->get('scheduled', 0);
+        $completedCount = $statusCounts->get('completed', 0);
+        $cancelledCount = $statusCounts->get('cancelled', 0);
+        // dd($pendingCount);
+        // exit();
+        return view('frontend.pages.dashboard.stats', compact('orders', 'pendingCount', 'scheduledCount', 'completedCount', 'cancelledCount'));
     }
     public function profile()
     {

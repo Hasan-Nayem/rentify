@@ -146,8 +146,8 @@
                                 <div class="col-lg-12 mb20">
                                     <h5>Pick Up Date & Time</h5>
                                     <div class="date-time-field">
-                                        <input type="text" id="date-picker" name="Pick Up Date" value="">
-                                        <select name="Pick Up Time" id="pickup-time">
+                                        <input type="text" id="date-picker" name="start_date" value="">
+                                        <select name="start_time" id="pickup-time">
                                             <option selected disabled value="Select time">Time</option>
                                             <option value="00:00">00:00</option>
                                             <option value="00:30">00:30</option>
@@ -199,13 +199,16 @@
                                             <option value="23:30">23:30</option>
                                         </select>
                                     </div>
+                                    @if (session('error_message'))
+                                        <span class="text-danger">{{ session('error_message') }}</span>
+                                    @endif
                                 </div>
 
                                 <div class="col-lg-12 mb20">
                                     <h5>Return Date & Time</h5>
                                     <div class="date-time-field">
-                                        <input type="text" id="date-picker-2" name="Collection Date" value="">
-                                        <select name="Collection Time" id="collection-time">
+                                        <input type="text" id="date-picker-2" name="end_date" value="">
+                                        <select name="end_time" id="collection-time">
                                             <option selected disabled value="Select time">Time</option>
                                             <option value="00:00">00:00</option>
                                             <option value="00:30">00:30</option>

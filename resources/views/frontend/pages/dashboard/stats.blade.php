@@ -6,8 +6,8 @@
             <div class="symbol mb40">
                 <i class="fa id-color fa-2x fa-calendar-check-o"></i>
             </div>
-            <span class="h1 mb0">03</span>
-            <span class="text-gray">Upcoming Orders</span>
+            <span class="h1 mb0">{{ $pendingCount }}</span>
+            <span class="text-gray">Pending Orders</span>
         </div>
     </div>
 
@@ -16,8 +16,8 @@
             <div class="symbol mb40">
                 <i class="fa id-color fa-2x fa-tags"></i>
             </div>
-            <span class="h1 mb0">12</span>
-            <span class="text-gray">Coupons</span>
+            <span class="h1 mb0">{{ $scheduledCount }}</span>
+            <span class="text-gray">Scheduled</span>
         </div>
     </div>
 
@@ -26,7 +26,7 @@
             <div class="symbol mb40">
                 <i class="fa id-color fa-2x fa-calendar"></i>
             </div>
-            <span class="h1 mb0">58</span>
+            <span class="h1 mb0">{{ $completedCount }}</span>
             <span class="text-gray">Total Orders</span>
         </div>
     </div>
@@ -36,12 +36,25 @@
             <div class="symbol mb40">
                 <i class="fa id-color fa-2x fa-calendar-times-o"></i>
             </div>
-            <span class="h1 mb0">24</span>
+            <span class="h1 mb0">{{ $cancelledCount }}</span>
             <span class="text-gray">Cancel Orders</span>
         </div>
     </div>
 </div>
 
+@if (session('message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>{{ session('message') }}!</strong> Please wait for admin approval.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if ($orders->count() == 0)
+    <div class="alert alert-info alert-dismissible fade show text-dark" role="alert">
+        You haven't place any order yet.<strong><a href="{{ route('showCars') }}"> Click here to order!</a></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@else
 <div class="card padding30 rounded-5 mb25">
     <h4>My Recent Orders</h4>
 
@@ -58,54 +71,37 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#01236</div></td>
-          <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">Jeep Renegade</span></td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Location</span>New York</td>
-          <td><span class="d-lg-none d-sm-block">Drop Off Location</span>Los Angeles</td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Date</span>March 2, 2023</td>
-          <td><span class="d-lg-none d-sm-block">Return Date</span>March 10, 2023</td>
-          <td><div class="badge rounded-pill bg-success">completed</div></td>
-        </tr>
-        <tr>
-          <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#01263</div></td>
-          <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">Mini Cooper</span></td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Location</span>San Fransisco</td>
-          <td><span class="d-lg-none d-sm-block">Drop Off Location</span>Chicago</td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Date</span>March 8, 2023</td>
-          <td><span class="d-lg-none d-sm-block">Return Date</span>March 10, 2023</td>
-          <td><div class="badge rounded-pill bg-danger">cancelled</div></td>
-        </tr>
-        <tr>
-          <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#01245</div></td>
-          <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">Ferrari Enzo</span></td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Location</span>Philadelphia</td>
-          <td><span class="d-lg-none d-sm-block">Drop Off Location</span>Washington</td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Date</span>March 6, 2023</td>
-          <td><span class="d-lg-none d-sm-block">Return Date</span>March 10, 2023</td>
-          <td><div class="badge rounded-pill bg-warning">scheduled</div></td>
-        </tr>
-        <tr>
-          <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#01287</div></td>
-          <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">Hyundai Staria</span></td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Location</span>Kansas City</td>
-          <td><span class="d-lg-none d-sm-block">Drop Off Location</span>Houston</td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Date</span>March 13, 2023</td>
-          <td><span class="d-lg-none d-sm-block">Return Date</span>March 10, 2023</td>
-          <td><div class="badge rounded-pill bg-success">completed</div></td>
-        </tr>
-        <tr>
-          <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#01216</div></td>
-          <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">Toyota Rav 4</span></td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Location</span>Baltimore</td>
-          <td><span class="d-lg-none d-sm-block">Drop Off Location</span>Sacramento</td>
-          <td><span class="d-lg-none d-sm-block">Pick Up Date</span>March 7, 2023</td>
-          <td><span class="d-lg-none d-sm-block">Return Date</span>March 10, 2023</td>
-          <td><div class="badge rounded-pill bg-warning">scheduled</div></td>
-        </tr>
+        @foreach ($orders as $order)
+            <tr>
+                <td><span class="d-lg-none d-sm-block">Order ID</span><div class="badge bg-gray-100 text-dark">#{{ $order->id }}</div></td>
+                <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">{{ $order->cars->name }}</span></td>
+                <td><span class="d-lg-none d-sm-block">Pick Up Location</span>{{ $order->pickup_location }}</td>
+                <td><span class="d-lg-none d-sm-block">Drop Off Location</span>{{ $order->drop_off_location }}</td>
+                {{-- <td><span class="d-lg-none d-sm-block">Pick Up Date</span>{{ $order->start_date }}</td> --}}
+                <td><span class="d-lg-none d-sm-block">Pick Up Date</span>
+                    {{ $order->start_date }}
+                </td>
+                <td><span class="d-lg-none d-sm-block">Return Date</span>{{ $order->end_date }}</td>
+                <td>
+                    @if ($order->status == 'pending')
+                        <div class="badge rounded-pill bg-warning">Pending</div>
+                    @elseif ($order->status == 'scheduled')
+                        <div class="badge rounded-pill bg-info">Scheduled</div>
+                    @elseif ($order->status == 'completed')
+                        <div class="badge rounded-pill bg-info">Completed</div>
+                    @elseif ($order->status == 'cancelled')
+                        <div class="badge rounded-pill bg-info">Cancelled</div>
+                    @endif
+
+                </td>
+            </tr>
+        @endforeach
       </tbody>
     </table>
 </div>
+@endif
+
+
 <div class="card padding30 rounded-5">
     <h4>My Favorites</h4>
     <div class="spacer-10"></div>
