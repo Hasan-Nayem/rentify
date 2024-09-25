@@ -54,7 +54,12 @@ class PageController extends Controller
     }
     public function orders()
     {
-        return view('frontend.pages.dashboard.orders');
+        $completedOrder = Rental::where('status', 'completed')->where('user_id', Auth::user()->id)->with('cars')->get();
+        $pendingOrder = Rental::where('status', 'pending')->where('user_id', Auth::user()->id)->with('cars')->get();
+        $scheduledOrder = Rental::where('status', 'scheduled')->where('user_id', Auth::user()->id)->with('cars')->get();
+        $cancelledOrder = Rental::where('status', 'cancelled ')->where('user_id', Auth::user()->id)->with('cars')->get();
+        return view('frontend.pages.dashboard.orders',
+                compact('completedOrder','pendingOrder','scheduledOrder','cancelledOrder'));
     }
 
     /**

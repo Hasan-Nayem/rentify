@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\RentalController;
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\RentalController as UserRentalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
@@ -28,7 +29,10 @@ Route::get('/cars/filter', [CarController::class, 'filterCars'])->name('cars.fil
 Route::get('/search-users', [CustomerController::class, 'search'])->name('user.search');
 
 Route::middleware('auth')->group(function(){
-    Route::post('/car-book/{userId}/{carId}', [RentalController::class, 'store'])->name('rental.store');
+    Route::prefix('/book')->group(function(){
+        Route::post('/car/{userId}/{carId}', [UserRentalController::class, 'store'])->name('rental.store');
+        Route::get('/cancel/{id}', [UserRentalController::class, 'cancel'])->name('rental.cancel');
+    });
     Route::prefix('/my-account')->group(function () {
         Route::get('/', [PageController::class, 'myAccount'])->name('dashboard.user');
         Route::get('/profile', [PageController::class, 'profile'])->name('profile.user');

@@ -48,6 +48,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
+@if (session('cancelBookingMessage'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>{{ session('cancelBookingMessage') }}!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
 
 @if ($orders->count() == 0)
     <div class="alert alert-info alert-dismissible fade show text-dark" role="alert">
@@ -68,6 +74,7 @@
           <th scope="col"><span class="fs-12 text-gray">Pick Up Date</span></th>
           <th scope="col"><span class="fs-12 text-gray">Return Date</span></th>
           <th scope="col"><span class="fs-12 text-gray">Status</span></th>
+          <th scope="col"><span class="fs-12 text-gray">Action</span></th>
         </tr>
       </thead>
       <tbody>
@@ -88,11 +95,17 @@
                     @elseif ($order->status == 'scheduled')
                         <div class="badge rounded-pill bg-info">Scheduled</div>
                     @elseif ($order->status == 'completed')
-                        <div class="badge rounded-pill bg-info">Completed</div>
+                        <div class="badge rounded-pill bg-success">Completed</div>
                     @elseif ($order->status == 'cancelled')
-                        <div class="badge rounded-pill bg-info">Cancelled</div>
+                        <div class="badge rounded-pill bg-danger">Cancelled</div>
                     @endif
-
+                </td>
+                <td><span class="d-lg-none d-sm-block">Action</span>
+                    @if ($order->status == 'cancelled')
+                        Cancelled
+                    @else
+                        <a href="{{ route('rental.cancel', $order->id) }}"  class="btn btn-danger">Cancel</a>
+                    @endif
                 </td>
             </tr>
         @endforeach
@@ -100,94 +113,4 @@
     </table>
 </div>
 @endif
-
-
-<div class="card padding30 rounded-5">
-    <h4>My Favorites</h4>
-    <div class="spacer-10"></div>
-    <div class="de-item-list no-border mb30">
-        <div class="d-img">
-            <img src="images/cars/jeep-renegade.jpg" class="img-fluid" alt="">
-        </div>
-        <div class="d-info">
-            <div class="d-text">
-                <h4>Jeep Renegade</h4>
-                <div class="d-atr-group">
-                    <ul class="d-atr">
-                        <li><span>Seats:</span>4</li>
-                        <li><span>Luggage:</span>2</li>
-                        <li><span>Doors:</span>4</li>
-                        <li><span>Fuel:</span>Petrol</li>
-                        <li><span>Horsepower:</span>500</li>
-                        <li><span>Engine:</span>3000</li>
-                        <li><span>Drive:</span>4x4</li>
-                        <li><span>Type:</span>Hatchback</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="d-price">
-            Daily rate from <span>$265</span>
-            <a class="btn-main" href="car-single.html">Rent Now</a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="de-item-list no-border mb30">
-        <div class="d-img">
-            <img src="images/cars/bmw-m5.jpg" class="img-fluid" alt="">
-        </div>
-        <div class="d-info">
-            <div class="d-text">
-                <h4>BMW M2</h4>
-                <div class="d-atr-group">
-                    <ul class="d-atr">
-                        <li><span>Seats:</span>4</li>
-                        <li><span>Luggage:</span>2</li>
-                        <li><span>Doors:</span>4</li>
-                        <li><span>Fuel:</span>Petrol</li>
-                        <li><span>Horsepower:</span>500</li>
-                        <li><span>Engine:</span>3000</li>
-                        <li><span>Drive:</span>4x4</li>
-                        <li><span>Type:</span>Hatchback</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="d-price">
-            Daily rate from <span>$244</span>
-            <a class="btn-main" href="car-single.html">Rent Now</a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-    <div class="de-item-list no-border mb30">
-        <div class="d-img">
-            <img src="images/cars/ferrari-enzo.jpg" class="img-fluid" alt="">
-        </div>
-        <div class="d-info">
-            <div class="d-text">
-                <h4>Ferarri Enzo</h4>
-                <div class="d-atr-group">
-                    <ul class="d-atr">
-                        <li><span>Seats:</span>4</li>
-                        <li><span>Luggage:</span>2</li>
-                        <li><span>Doors:</span>4</li>
-                        <li><span>Fuel:</span>Petrol</li>
-                        <li><span>Horsepower:</span>500</li>
-                        <li><span>Engine:</span>3000</li>
-                        <li><span>Drive:</span>4x4</li>
-                        <li><span>Type:</span>Hatchback</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="d-price">
-            Daily rate from <span>$167</span>
-            <a class="btn-main" href="car-single.html">Rent Now</a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-
-</div>
 @endsection
