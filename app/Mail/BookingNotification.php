@@ -16,9 +16,11 @@ class BookingNotification extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $user;
+
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -27,7 +29,7 @@ class BookingNotification extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Booking Notification',
+            subject: 'Rentaly - Car Book Notification',
         );
     }
 
@@ -37,7 +39,7 @@ class BookingNotification extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'frontend.emails.bookingNotification',
         );
     }
 

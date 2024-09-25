@@ -7,6 +7,9 @@ use App\Models\Car;
 use App\Models\Rental;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\BookingNotification;
+use App\Models\User;
 
 class RentalController extends Controller
 {
@@ -32,7 +35,7 @@ class RentalController extends Controller
     public function store(Request $request, String $userId, String $carId)
     {
         $car = Car::find($carId);
-
+        $userEmail = User::find($userId);
         $start_date = new DateTime($request->start_date);
         $end_date = new DateTime($request->end_date);
 
@@ -57,6 +60,7 @@ class RentalController extends Controller
         }
         $rentalInfo->status	 = 'pending';
         $rentalInfo->save();
+        Mail::to($request->user())->send(new BookingNotification($userEmail->name));
         return redirect()->route('dashboard.user')->with('message', 'Your booking request is saved successfully.');
     }
 
