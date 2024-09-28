@@ -88,12 +88,12 @@
                     <td class="col-2 text-center">${{ $carInfo->daily_rent_price }}</td>
       			        <td class="col-1 text-center">
                             {{
-                                \Carbon\Carbon::createFromFormat('d/m/y',$carInfo->start_date)->format('F d, Y');
+                                \Carbon\Carbon::createFromFormat('d/m/y',$bookingInfo->start_date)->format('F d, Y');
                             }}
                         </td>
       			        <td class="col-1 text-center">
                             {{
-                                \Carbon\Carbon::createFromFormat('d/m/y',$carInfo->end_date)->format('F d, Y');
+                                \Carbon\Carbon::createFromFormat('d/m/y',$bookingInfo->end_date)->format('F d, Y');
                             }}
                         </td>
       			        <td class="col-2 text-end">${{$bookingInfo->total_cost}}</td>

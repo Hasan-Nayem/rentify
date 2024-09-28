@@ -79,13 +79,7 @@ class RentalController extends Controller
         // exit();
         $booking->status = 'scheduled';
         $booking->save();
-        Mail::to($booking->users->email)
-        ->send(new ApprovedEmailNotification(
-                    $userInfo->name,
-                    $userInfo->email,
-                    $booking,
-                    $carInfo,
-                ));
+        Mail::to($booking->users->email)->send(new ApprovedEmailNotification($userInfo->name,$userInfo->email,$booking,$carInfo));
         return redirect()->route('rentals.index')->with('success', "Booking has been approved");
 
     }
