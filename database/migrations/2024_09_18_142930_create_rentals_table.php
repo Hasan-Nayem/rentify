@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('start_date');
             $table->string('end_date');
             $table->decimal('total_cost');
-            $table->string('status')->default('ongoing');
+            $table->string('status')->default('scheduled');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

@@ -13,6 +13,8 @@ class Rental extends Model
     protected $fillable = [
         'user_id',
         'car_id',
+        'pickup_location',
+        'drop_off_location',
         'start_date',
         'end_date',
         'total_cost ',

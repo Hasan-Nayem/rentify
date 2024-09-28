@@ -86,9 +86,15 @@
                 <td><span class="d-lg-none d-sm-block">Drop Off Location</span>{{ $order->drop_off_location }}</td>
                 {{-- <td><span class="d-lg-none d-sm-block">Pick Up Date</span>{{ $order->start_date }}</td> --}}
                 <td><span class="d-lg-none d-sm-block">Pick Up Date</span>
-                    {{ $order->start_date }}
+                    {{
+                          \Carbon\Carbon::createFromFormat('d/m/y',$order->start_date)->format('F d, Y');
+                    }}
                 </td>
-                <td><span class="d-lg-none d-sm-block">Return Date</span>{{ $order->end_date }}</td>
+                <td><span class="d-lg-none d-sm-block">Return Date</span>
+                    {{
+                        \Carbon\Carbon::createFromFormat('d/m/y',$order->end_date)->format('F d, Y');
+                  }}
+                </td>
                 <td>
                     @if ($order->status == 'pending')
                         <div class="badge rounded-pill bg-warning">Pending</div>
@@ -101,8 +107,8 @@
                     @endif
                 </td>
                 <td><span class="d-lg-none d-sm-block">Action</span>
-                    @if ($order->status == 'cancelled')
-                        Cancelled
+                    @if ($order->status == 'cancelled' || $order->status == 'completed')
+                        No action available
                     @else
                         <a href="{{ route('rental.cancel', $order->id) }}"  class="btn btn-danger">Cancel</a>
                     @endif

@@ -38,7 +38,7 @@
           <tr>
            <th>Rent ID</th>
            <th>Customer Name</th>
-           <th>Car Details</th>>
+           <th>Car Details</th>
            <th>Status</th>
            <th>Action</th>
           </tr>
@@ -99,14 +99,30 @@
                             <h1 class="text-center">Trip Information</h1>
                             <p class="">Picup Location: {{ $order->pickup_location }}</p>
                             <p class="">Dropoff Location: {{ $order->drop_off_location }}</p>
-                            <p class="">Starting Date: {{ $order->start_date }}</p>
-                            <p class="">Ending Date: {{ $order->end_date }}</p>
+                            <p class="">Starting Date:
+                                {{
+                                    \Carbon\Carbon::createFromFormat('d/m/y',$order->start_date)->format('F d, Y');
+                                }}
+                            </p>
+                            <p class="">Ending Date:
+                                {{
+                                    \Carbon\Carbon::createFromFormat('d/m/y',$order->end_date)->format('F d, Y');
+                                }}
+                            </p>
                             <h4 class="fw-bolder text-center text-success">Total revenue - {{ $order->total_cost }}</h4>
+                            <p class="badge bg-success">Payment Method:  Cash</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close now</button>
-                            <button type="button" class="btn btn-success">Approve this booking</button>
-                            <button type="button" class="btn btn-danger">Cancel this booking</button>
+                            {{-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close now</button>
+                            <button type="button" class="btn btn-danger">Cancel this booking</button> --}}
+                            @if ($order->status == 'completed')
+                                <p class="">Trip is completed</p>
+                            @elseif ($order->status == 'pending')
+                              <a type="button" href="{{ route('rentals.approved', $order->id) }}" class="btn btn-success">Approve this booking</a>
+                              <a type="button" href="{{ route('rentals.cancelled', $order->id) }}" class="btn btn-danger">Cancel this booking</a>
+                            @elseif ($order->status == 'scheduled')
+                              <a type="button" href="{{ route('rentals.completed', $order->id) }}" class="btn btn-success">Mark as completed</a>
+                            @endif
                         </div>
                     </div>
                     </div>

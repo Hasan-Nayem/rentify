@@ -74,7 +74,7 @@
             <td>Lorem ipsum dolor sit ...</td>
             <td class="">
                 {{-- fadeIn animated bx bx-history --}}
-                <a href="javascript:;" class="text-info fs-5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Show History" aria-label="Show History"><i class="bx bx-history"></i></a>
+                <a href="{{ route('rentals.history', $customer->id) }}" class="text-info fs-5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Show History" aria-label="Show History"><i class="bx bx-history"></i></a>
             </td>
             <td>
               <div class="table-actions d-flex align-items-center gap-3 fs-6">
@@ -123,7 +123,7 @@
                             <td>${user.phone}</td>
                             <td>${user.address}</td>
                             <td>
-                                <a href="javascript:;" class="text-info fs-5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Show History" aria-label="Show History"><i class="bx bx-history"></i></a>
+                                <a href="/admin/customer/history/${user.id}" class="text-info fs-5" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="Show History" aria-label="Show History"><i class="bx bx-history"></i></a>
                             </td>
                             <td>
                                 <div class="table-actions d-flex align-items-center gap-3 fs-6">

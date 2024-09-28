@@ -100,4 +100,5 @@ class RentalController extends Controller
         Mail::to($request->user())->send(new CancelBookingNotification($request->user()->name));
         return redirect()->route('dashboard.user')->with('cancelBookingMessage', "Booking has been cancelled");
     }
+
 }

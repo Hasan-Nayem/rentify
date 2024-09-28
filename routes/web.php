@@ -55,6 +55,10 @@ Route::prefix('/admin')->middleware('auth')->group(function (){
         Route::get('/manage', [RentalController::class, 'index'])->name('rentals.index');
         Route::get('/view', [RentalController::class, 'show'])->name('rentals.show');
         Route::get('/edit/{id}', [RentalController::class, 'edit'])->name('rentals.edit');
+        Route::get('/approve/{id}', [RentalController::class, 'approve'])->name('rentals.approved');
+        Route::get('/complete/{id}', [RentalController::class, 'complete'])->name('rentals.completed');
+        Route::get('/cancel/{id}', [RentalController::class, 'cancel'])->name('rentals.cancelled');
+        Route::get('/history/{id}', [RentalController::class, 'history'])->name('rentals.history');
     })->middleware(Admin::class);
     Route::prefix('/customer')->group(function (){
         Route::get('/manage', [CustomerController::class, 'index'])->name('customer.index');

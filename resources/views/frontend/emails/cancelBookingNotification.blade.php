@@ -28,7 +28,7 @@
             <td style="text-align: center;">
               <h2 style="margin: 0px;padding-bottom: 25px;font-size:22px; color: red"> Your booking has been cancelled.</h2>
               <p style="text-align: left; margin: 0 40px; padding-bottom: 25px;">Dear, <span style="font-weight: 600">{{ $user }}</span></p>
-              <p style=" margin: 0px 40px;padding-bottom: 25px;line-height: 2; font-size: 15px;">Please be advised that <span style="color: red; font-weight: 600">you've canelled your booking.</span> Let us know if you've any suggestion regarding our services.</p>
+              <p style=" margin: 0px 40px;padding-bottom: 25px;line-height: 2; font-size: 15px;">Please be advised that <span style="color: red; font-weight: 600">Due to unconveninet circomstances, we've cancelled your booking.</span> Let us know if you've any suggestion regarding our services.</p>
             </td>
           </tr>
           <tr>

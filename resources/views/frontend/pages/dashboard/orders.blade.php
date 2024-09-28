@@ -31,8 +31,16 @@
                             <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">{{$order->cars->name}}</span></td>
                             <td><span class="d-lg-none d-sm-block">Pick Up Location</span>{{$order->pickup_location}}</td>
                             <td><span class="d-lg-none d-sm-block">Drop Off Location</span>{{$order->drop_off_location}}</td>
-                            <td><span class="d-lg-none d-sm-block">Pick Up Date</span>{{$order->start_date}}</td>
-                            <td><span class="d-lg-none d-sm-block">Return Date</span>{{$order->end_date}}</td>
+                            <td><span class="d-lg-none d-sm-block">Pick Up Date</span>
+                                {{
+                                    \Carbon\Carbon::createFromFormat('d/m/y',$order->start_date)->format('F d, Y');
+                                }}
+                              </td>
+                            <td><span class="d-lg-none d-sm-block">Return Date</span>
+                                {{
+                                    \Carbon\Carbon::createFromFormat('d/m/y',$order->end_date)->format('F d, Y');
+                                }}
+                            </td>
                             <td><div class="badge rounded-pill bg-warning" style="background-size: 100%; background-repeat: no-repeat;">pending</div></td>
                             <td>
                                 <span class="d-lg-none d-sm-block">Action</span>
@@ -74,8 +82,16 @@
                         <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">{{$order->cars->name}}</span></td>
                         <td><span class="d-lg-none d-sm-block">Pick Up Location</span>{{$order->pickup_location}}</td>
                         <td><span class="d-lg-none d-sm-block">Drop Off Location</span>{{$order->drop_off_location}}</td>
-                        <td><span class="d-lg-none d-sm-block">Pick Up Date</span>{{$order->start_date}}</td>
-                        <td><span class="d-lg-none d-sm-block">Return Date</span>{{$order->end_date}}</td>
+                        <td><span class="d-lg-none d-sm-block">Pick Up Date</span>
+                            {{
+                                \Carbon\Carbon::createFromFormat('d/m/y',$order->start_date)->format('F d, Y');
+                            }}
+                        </td>
+                        <td><span class="d-lg-none d-sm-block">Return Date</span>
+                            {{
+                                \Carbon\Carbon::createFromFormat('d/m/y',$order->end_date)->format('F d, Y');
+                            }}
+                        </td>
                         <td><div class="badge rounded-pill bg-info" style="background-size: 100%; background-repeat: no-repeat;">scheduled</div></td>
                         <td>
                             <span class="d-lg-none d-sm-block">Action</span>
@@ -116,13 +132,17 @@
                         <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">{{$order->cars->name}}</span></td>
                         <td><span class="d-lg-none d-sm-block">Pick Up Location</span>{{$order->pickup_location}}</td>
                         <td><span class="d-lg-none d-sm-block">Drop Off Location</span>{{$order->drop_off_location}}</td>
-                        <td><span class="d-lg-none d-sm-block">Pick Up Date</span>{{$order->start_date}}</td>
-                        <td><span class="d-lg-none d-sm-block">Return Date</span>{{$order->end_date}}</td>
-                        <td><div class="badge rounded-pill bg-success" style="background-size: 100%; background-repeat: no-repeat;">completed</div></td>
-                        <td>
-                            <span class="d-lg-none d-sm-block">Action</span>
-                            <a href="{{ route('rental.cancel', $order->id) }}" class="btn btn-danger">Cancel</a>
+                        <td><span class="d-lg-none d-sm-block">Pick Up Date</span>
+                            {{
+                                \Carbon\Carbon::createFromFormat('d/m/y',$order->start_date)->format('F d, Y');
+                            }}
                         </td>
+                        <td><span class="d-lg-none d-sm-block">Return Date</span>
+                            {{
+                                \Carbon\Carbon::createFromFormat('d/m/y',$order->end_date)->format('F d, Y');
+                            }}
+                          </td>
+                        <td><div class="badge rounded-pill bg-success" style="background-size: 100%; background-repeat: no-repeat;">completed</div></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -132,7 +152,6 @@
     </div>
     <div class="card padding30 rounded-5 mb25" style="background-size: 100%; background-repeat: no-repeat;">
         <h4>Cancelled Orders</h4>
-
         @if ($cancelledOrder->count() == 0)
             <div class="alert alert-info alert-dismissible fade show text-dark" role="alert">
                 <strong>No Scheduled Orders found</strong>
@@ -158,8 +177,16 @@
                         <td><span class="d-lg-none d-sm-block">Car Name</span><span class="bold">{{$order->cars->name}}</span></td>
                         <td><span class="d-lg-none d-sm-block">Pick Up Location</span>{{$order->pickup_location}}</td>
                         <td><span class="d-lg-none d-sm-block">Drop Off Location</span>{{$order->drop_off_location}}</td>
-                        <td><span class="d-lg-none d-sm-block">Pick Up Date</span>{{$order->start_date}}</td>
-                        <td><span class="d-lg-none d-sm-block">Return Date</span>{{$order->end_date}}</td>
+                        <td><span class="d-lg-none d-sm-block">Pick Up Date</span>
+                            {{
+                                \Carbon\Carbon::createFromFormat('d/m/y',$order->start_date)->format('F d, Y');
+                            }}
+                        </td>
+                        <td><span class="d-lg-none d-sm-block">Return Date</span>
+                            {{
+                                \Carbon\Carbon::createFromFormat('d/m/y',$order->end_date)->format('F d, Y');
+                            }}
+                        </td>
                         <td><div class="badge rounded-pill bg-danger" style="background-size: 100%; background-repeat: no-repeat;">cancelled</div></td>
                     </tr>
                 @endforeach
