@@ -134,12 +134,12 @@
                                     <p class="">Dropoff Location: {{ $order->drop_off_location }}</p>
                                     <p class="">Starting Date:
                                         {{
-                                            \Carbon\Carbon::createFromFormat('d/m/y',$order->start_date)->format('F d, Y');
+                                            $order->start_date
                                         }}
                                     </p>
                                     <p class="">Ending Date:
                                         {{
-                                            \Carbon\Carbon::createFromFormat('d/m/y',$order->end_date)->format('F d, Y');
+                                            $order->end_date
                                         }}
                                     </p>
                                     <h4 class="fw-bolder text-center text-success">Total revenue - {{ $order->total_cost }}</h4>

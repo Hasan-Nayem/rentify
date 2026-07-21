@@ -21,14 +21,26 @@
           <li class="nav-item dropdown dropdown-user-setting">
             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
               <div class="user-setting d-flex align-items-center">
-                <img src="assets/images/avatars/avatar-1.png" class="user-img" alt="">
+                @if(!empty(Auth::user()->avatar))
+                  <img src="{{ asset(Auth::user()->avatar) }}" class="user-img rounded-circle" alt="" style="width: 36px; height: 36px; object-fit: cover;">
+                @else
+                  <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 36px; height: 36px; font-size: 16px;">
+                    {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                  </div>
+                @endif
               </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
                  <a class="dropdown-item" href="#">
                    <div class="d-flex align-items-center">
-                      <img src="assets/images/avatars/avatar-1.png" alt="" class="rounded-circle" width="54" height="54">
+                      @if(!empty(Auth::user()->avatar))
+                        <img src="{{ asset(Auth::user()->avatar) }}" alt="" class="rounded-circle" width="54" height="54" style="object-fit: cover;">
+                      @else
+                        <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white" style="width: 54px; height: 54px; font-size: 24px;">
+                          {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                        </div>
+                      @endif
                       <div class="ms-3">
                         <h6 class="mb-0 dropdown-user-name">{{ Auth::user()->name }}</h6>
                         <small class="mb-0 dropdown-user-designation text-secondary">{{ Auth::user()->role }}</small>
@@ -38,7 +50,7 @@
                </li>
                <li><hr class="dropdown-divider"></li>
                <li>
-                  <a class="dropdown-item" href="pages-user-profile.html">
+                  <a class="dropdown-item" href="{{ route('profile.index') }}">
                      <div class="d-flex align-items-center">
                        <div class=""><i class="bi bi-person-fill"></i></div>
                        <div class="ms-3"><span>Profile</span></div>

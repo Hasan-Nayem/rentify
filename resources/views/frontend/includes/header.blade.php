@@ -1,20 +1,28 @@
 <!-- header begin -->
+@php
+    $topbar = \App\Models\CMS::where('page', 'homepage')->where('section', 'top_bar')->first();
+@endphp
 <header class="transparent header-light scroll-light has-topbar">
     <div id="topbar" class="topbar-dark text-light">
         <div class="container">
             <div class="topbar-left xs-hide">
                 <div class="topbar-widget">
-                    <div class="topbar-widget"><a href="#"><i class="fa fa-phone"></i>+208 333 9296</a></div>
-                    <div class="topbar-widget"><a href="#"><i class="fa fa-envelope"></i>contact@rentaly.com</a></div>
-                    <div class="topbar-widget"><a href="#"><i class="fa fa-clock-o"></i>Mon - Fri 08.00 - 18.00</a></div>
+                    <div class="topbar-widget"><a href="#"><i class="fa fa-phone"></i>{{ $topbar->title ?? '+208 333 9296' }}</a></div>
+                    <div class="topbar-widget"><a href="#"><i class="fa fa-envelope"></i>{{ $topbar->sub_title_one ?? 'contact@rentaly.com' }}</a></div>
+                    <div class="topbar-widget"><a href="#"><i class="fa fa-clock-o"></i>{{ $topbar->sub_title_two ?? 'Mon - Fri 08.00 - 18.00' }}</a></div>
                 </div>
             </div>
 
             <div class="topbar-right">
                 <div class="social-icons">
-                    <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
-                    <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
-                    <a href="#"><i class="fa fa-youtube fa-lg"></i></a>
+                    @php
+                        $facebook = $topbar->btn1 ?? '#';
+                        $twitter = $topbar->btn2 ?? '#';
+                        $youtube = $topbar->header ?? '#';
+                    @endphp
+                    <a href="{{ $facebook }}"><i class="fa fa-facebook fa-lg"></i></a>
+                    <a href="{{ $twitter }}"><i class="fa fa-twitter fa-lg"></i></a>
+                    <a href="{{ $youtube }}"><i class="fa fa-youtube fa-lg"></i></a>
                     <a href="#"><i class="fa fa-pinterest fa-lg"></i></a>
                     <a href="#"><i class="fa fa-instagram fa-lg"></i></a>
                 </div>

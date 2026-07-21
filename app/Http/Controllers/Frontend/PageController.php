@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use App\Models\CMS;
 use App\Models\Rental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,11 @@ class PageController extends Controller
     public function homepage()
     {
         $cars = Car::get();
-        return view('frontend.pages.homepage', compact('cars'));
+
+        // Fetch all CMS sections for homepage
+        $cmsSections = CMS::where('page', 'homepage')->get()->keyBy('section');
+
+        return view('frontend.pages.homepage', compact('cars', 'cmsSections'));
     }
 
     /**

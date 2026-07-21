@@ -17,7 +17,7 @@ class PageController extends Controller
         $totalRents = Rental::all()->count();
         $totalIncome = DB::table('rentals')->where('status', 'completed')->sum('total_cost');
         $orders = Rental::get();
-        // $orders = DB::select('SELECT * FROM rentals WHERE DATE(created_at) = ?', [Carbon::today()->toDateString()]);;
+        
         return view('backend.pages.homepage', compact('totalCars', 'totalAvailableCars', 'totalRents', 'totalIncome', 'orders'));
     }
 }
